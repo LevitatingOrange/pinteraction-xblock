@@ -1,7 +1,5 @@
 /* Javascript for PatientInteractionXBlock. */
 
-var already_attempted = false;
-
 function PatientInteractionXBlock(runtime, element) {
     function updateResult(result) {
 	if (result["already_attempted"]) {
@@ -12,13 +10,13 @@ function PatientInteractionXBlock(runtime, element) {
 		    $(elem).addClass("not-selected");
 		}
 	    });
-	    $(".result-icon").removeClass("icon-chat");
-	    $(".result-icon").addClass(result.problem_solved? "icon-ok":"icon-cancel");
-	    $(".pinteraction_block").addClass(result.problem_solved? "pblock-correct":"pblock-incorrect");
-	    $(".patient-response").removeClass("hidden");
-	    $(".patient-response").text(result["patient_answer"]);
-	    $(".footer").removeClass("hidden");
-	    $(".note").text(result["note"]);
+	    $(".result-icon", element).removeClass("icon-chat");
+	    $(".result-icon", element).addClass(result.problem_solved? "icon-ok":"icon-cancel");
+	    $(".pinteraction_block", element).addClass(result.problem_solved? "pblock-correct":"pblock-incorrect");
+	    $(".patient-response", element).removeClass("hidden");
+	    $(".patient-response", element).text(result["patient_answer"]);
+	    $(".footer", element).removeClass("hidden");
+	    $(".note", element).text(result["note"]);
 	}
 	//	$(".indicator").addClass(result.problem_solved? "icon-ok" : "icon-cancel");
     }
@@ -27,9 +25,6 @@ function PatientInteractionXBlock(runtime, element) {
 
     $(".doctor", element).each(function(index, elem) {
 	$(elem).click(function(eventObject) {
-	    if (already_attempted) {
-		return;
-	    }
 	    $.ajax({
 		type: "POST",
 		url: handlerUrl,

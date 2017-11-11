@@ -8,6 +8,7 @@ from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, String, Scope
 from xblock.fragment import Fragment
 from django.template import Context, Template
+#from xblockutils.studio_editable import StudioEditableXBlockMixin
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
@@ -33,12 +34,6 @@ class PatientInteractionXBlock(XBlock):
     has_children = True
     has_score = True
     icon_class = "problem"
-
-    def studio_view(self, context=None):
-        html = resource_string("static/html/placeholder_cms.html")
-        frag = Fragment(html.format(self=self))
-        return frag
-
 
     def load_resource(self, resource_path):
         resource_content = pkg_resources.resource_string(__name__, resource_path)
@@ -86,6 +81,7 @@ class PatientInteractionXBlock(XBlock):
         """
         check if correct
         """
+        print(self.scope_ids)
         print(data["answer"])
         if not self.problem_attempted and (int(data["answer"]) != -1):
             self.problem_attempted = True
