@@ -50,6 +50,11 @@ class PatientInteractionXBlock(XBlock):
                 block.question = text
         return block
 
+    def preview_view(self, context=None):
+        html = resource_string("static/html/placeholder_cms.html")
+        frag = Fragment(html.format(self=self))
+        return frag
+
     def author_view(self, context=None):
         html = resource_string("static/html/placeholder_cms.html")
         frag = Fragment(html.format(self=self))

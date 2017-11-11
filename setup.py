@@ -36,7 +36,7 @@ print package_data
 
 setup(
     name='pinteraction-xblock',
-    version='0.2',
+    version='0.2.1',
     description='pinteraction XBlock',   # TODO: write a better description.
     license='UNKNOWN',          # TODO: choose a license: 'AGPL v3' and 'Apache 2.0' are popular.
     packages=[
