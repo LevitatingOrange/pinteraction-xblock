@@ -7,6 +7,7 @@ import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, String, Scope
 from xblock.fragment import Fragment
+from django.template import loader
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
@@ -50,16 +51,6 @@ class PatientInteractionXBlock(XBlock):
                 block.question = text
         return block
 
-    def preview_view(self, context=None):
-        html = resource_string("static/html/placeholder_cms.html")
-        frag = Fragment(html.format(self=self))
-        return frag
-
-    def author_view(self, context=None):
-        html = resource_string("static/html/placeholder_cms.html")
-        frag = Fragment(html.format(self=self))
-        return frag
-
     def student_view(self, context=None):
         """
         The primary view of the PatientInteractionXBlock, shown to students
@@ -70,7 +61,8 @@ class PatientInteractionXBlock(XBlock):
         result.add_css(resource_string("static/css/icons.css"))
         child_frags = self.runtime.render_children(self, context=context)
         result.add_frags_resources(child_frags)
-        result.add_content(self.runtime.render_template("pinteraction.html", children=child_frags, question=self.question, name=self.name))
+        template = loader.get_template("pinteraction.html")
+        result.add_content(template.render({"children":child_frags, "question":self.question, "name":self.name}))
         result.add_javascript(resource_string("static/js/src/pinteraction.js"))
         result.initialize_js('PatientInteractionXBlock')
         return result
