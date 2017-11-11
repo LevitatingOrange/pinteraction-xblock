@@ -1,0 +1,127 @@
+/* CSS for PatientInteractionXBlock */
+
+.pinteraction_block {
+    width: 500px;
+    border: solid;
+    border-width: 2px;
+    border-color: #FFFFFF;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+}
+
+.pinteraction_block .header {
+    border-top:solid;
+    border-width: 0px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #DDDDDD;
+    padding: 5px;
+    transition: all 0.3s cubic-bezier(.5,.8,.25,1);
+}
+
+
+.pinteraction_block .main {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.pinteraction_block .footer {
+    border-bottom:solid;
+    border-width: 0px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #DDDDDD;
+    padding: 5px;
+    transition: all 0.3s cubic-bezier(.5,.8,.25,1);
+}
+
+
+.pinteraction_block .statement {
+    background-color: #FFFFFF;
+    margin-bottom: 5px;
+    padding: 5px;
+    width: 250px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.pinteraction_block .doctor {
+    margin-left: 5px;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.pinteraction_block .patient {
+    float: right;
+    margin-right: 5px;
+    text-align: right;
+    transition: all 0.3s cubic-bezier(.5,.8,.25,1);
+}
+
+/* Right triangle, left side slightly down */
+.tri-right.left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -9px;
+    top: 5px;
+    right: auto;
+    bottom: auto;
+    border: 5px solid;
+    border-color: #FFFFFF #FFFFFF transparent transparent;
+}
+
+/* Right triangle, left side slightly down */
+.tri-right.right-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -9px;
+    top: 5px;
+    bottom: auto;
+    border: 5px solid;
+    border-color: #FFFFFF transparent transparent #FFFFFF;
+}
+
+.pblock-correct {
+    border-color: green;
+}
+.pblock-incorrect {
+    border-color: red;
+}
+
+.pinteraction_block .hidden { 
+    opacity: 0;
+    display: none;
+}
+
+.pinteraction_block .selectable:hover {
+    cursor: pointer; 
+    margin-left: 5px;
+    text-align: left;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.pinteraction_block .not-selected {
+    color: #BBBBBB;
+}
+
+.pinteraction_block .indicator {
+    float: right;
+}
+
+.pinteraction_block .icon-cancel:before {
+    color: red;
+    content: '\e800';
+} /* '' */
+.pinteraction_block .icon-info:before { content: '\e801'; } /* '' */
+.pinteraction_block .icon-help:before { content: '\e802'; } /* '' */
+.pinteraction_block .icon-ok:before {
+    color: green;
+    content: '\e806';
+} /* '' */
+.pinteraction_block .icon-chat:before { content: '\f03d'; } /* '' */

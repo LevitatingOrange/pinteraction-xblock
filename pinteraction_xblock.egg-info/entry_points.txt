@@ -1,0 +1,4 @@
+[xblock.v1]
+pinteraction = pinteraction.pinteraction:PatientInteractionXBlock
+response = pinteraction.pinteraction:PResponseXBlock
+
