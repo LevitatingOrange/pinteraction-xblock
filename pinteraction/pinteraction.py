@@ -7,7 +7,7 @@ import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Integer, Boolean, String, Scope
 from xblock.fragment import Fragment
-from django.template import loader
+from django.template import Context, Template
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
@@ -33,6 +33,15 @@ class PatientInteractionXBlock(XBlock):
     has_children = True
     has_score = True
     icon_class = "problem"
+
+
+    def load_resource(self, resource_path):
+        resource_content = pkg_resources.resource_string(__name__, resource_path)
+        return unicode(resource_content)
+
+    def render_template(self, template_path, context={}):
+        template_str = self.load_resource(template_path)
+        return Template(template_str).render(Context(context))
 
     @classmethod
     def parse_xml(cls, node, runtime, keys, id_generator):
@@ -61,8 +70,8 @@ class PatientInteractionXBlock(XBlock):
         result.add_css(resource_string("static/css/icons.css"))
         child_frags = self.runtime.render_children(self, context=context)
         result.add_frags_resources(child_frags)
-        template = loader.get_template("pinteraction.html")
-        result.add_content(template.render({"children":child_frags, "question":self.question, "name":self.name}))
+        html = self.render_template("templates/pinteraction.html",{"children":child_frags, "question":self.question, "name":self.name})
+        result.add_content(html)
         result.add_javascript(resource_string("static/js/src/pinteraction.js"))
         result.initialize_js('PatientInteractionXBlock')
         return result
