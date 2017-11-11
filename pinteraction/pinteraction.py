@@ -34,6 +34,11 @@ class PatientInteractionXBlock(XBlock):
     has_score = True
     icon_class = "problem"
 
+    def studio_view(self, context=None):
+        html = resource_string("static/html/placeholder_cms.html")
+        frag = Fragment(html.format(self=self))
+        return frag
+
 
     def load_resource(self, resource_path):
         resource_content = pkg_resources.resource_string(__name__, resource_path)
